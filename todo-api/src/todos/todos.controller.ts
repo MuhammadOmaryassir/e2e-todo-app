@@ -10,15 +10,33 @@ export class TodosController {
     return this.todosService.create(body);
   }
   @Get()
-  findTodos() {
-    return this.todosService.find();
+  async findTodos() {
+    let todos = await this.todosService.find();
+    console.log(todos)
+    if(todos.length == 0) {
+      return {
+        data:[],
+        status:204,
+        message: 'No Content'
+      }
+    }
+    return {
+      data:todos,
+      status:200,
+      message: 'Done'
+    } 
   }
   @Get('/:id')
-  findTodoById(@Param('id') id: string) {
+  findTodoById(@Param('id') id: number) {
     return this.todosService.findOne(id);
   }
+  @Patch('/:id')
+  updateTodoStatus(@Param('id') id: number) {
+    return this.todosService.update(id);
+  }
+
   @Delete('/:id')
-  deleteTodo(@Param('id') id: string) {
-    console.log(`Delete Todo by Id ${id}`);
+  deleteTodo(@Param('id') id: number) {
+    return this.todosService.delete(id)
   }
 }

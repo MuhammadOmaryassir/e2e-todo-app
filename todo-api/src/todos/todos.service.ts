@@ -16,27 +16,36 @@ export class TodosService {
 
   find() {
     /** We can filter find by passing params to repository find() method */
-    return this.repo.find();
+    return  this.repo.find();
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     /** Repositroy findOne() method will return single record that matches input
      * Where as find() will return all records that matches our input
      */
     if (!id) return null;
-    return this.repo.findOne(id);
+    return this.repo.findOne({ where:{ id }});
   }
 
-  async update(id: string) {
+  async update(id: number) {
     /**
      * Get the record
      * Check if record exists
      * If exists only then update our record
      */
-    const todo = await this.repo.findOne(id);
+    const todo = await this.repo.findOne({ where:{ id }});
     if (!todo) {
       throw new NotFoundException('Todo not found');
     }
     return this.repo.save({ ...todo, isCompleted: true });
+  }
+
+  async delete(id: number){
+    const todo = await this.repo.findOne({ where:{ id }});
+    if (!todo) {
+      throw new NotFoundException('Todo not found');
+    }
+    return this.repo.remove(todo)
+
   }
 }

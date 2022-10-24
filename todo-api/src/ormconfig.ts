@@ -1,15 +1,15 @@
-import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
 import { DataSourceOptions } from "typeorm";
 
 
  export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory : async () : Promise<any> => {
     return {
-      host: 'localhost',
-      username: process.env.MYSQLDB_USER,
-      password: process.env.MYSQLDB_ROOT_PASSWORD,
-      port: Number(process.env.MYSQLDB_DOCKER_PORT),
-      database: process.env.MYSQLDB_DATABASE,
+      host: 'sql8.freemysqlhosting.net',
+      username: 'sql8528957',
+      password: 'l2vKdCIJyF',
+      port: 3306,
+      database: 'sql8528957',
       type: 'mysql',
       synchronize: false,
       logging: process.env.NODE_ENV == 'Testing' ? false : true,
@@ -28,11 +28,11 @@ import { DataSourceOptions } from "typeorm";
 export function typeOrmConfig() 
 {
 return {
-  host: 'localhost',
-  username: process.env.MYSQLDB_USER,
-  password: process.env.MYSQLDB_ROOT_PASSWORD,
-  port: Number(process.env.MYSQLDB_DOCKER_PORT),
-  database: process.env.MYSQLDB_DATABASE,
+  host: 'sql8.freemysqlhosting.net',
+  username: 'sql8528957',
+  password: 'l2vKdCIJyF',
+  port: 3306,
+  database: 'sql8528957',
   type: 'mysql',
   synchronize: false,
   logging: process.env.NODE_ENV == 'Testing' ? false : true,
