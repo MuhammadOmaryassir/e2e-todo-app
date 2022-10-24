@@ -8,7 +8,7 @@ import { TodosModule } from './todos/todos.module';
 
 @Module({
   imports: [ 
-    TypeOrmModule.forRootAsync(typeOrmAsyncConfig), DatabaseModule, TodosModule
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig), TodosModule
   ],
   controllers: [AppController],
   providers: [AppService],

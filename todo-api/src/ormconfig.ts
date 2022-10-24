@@ -5,10 +5,10 @@ import { DataSourceOptions } from "typeorm";
  export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory : async () : Promise<any> => {
     return {
-      host: 'mysqldb',
+      host: 'localhost',
       username: process.env.MYSQLDB_USER,
       password: process.env.MYSQLDB_ROOT_PASSWORD,
-      port: Number(process.env.MYSQLDB_LOCAL_PORT),
+      port: Number(process.env.MYSQLDB_DOCKER_PORT),
       database: process.env.MYSQLDB_DATABASE,
       type: 'mysql',
       synchronize: false,
@@ -28,10 +28,10 @@ import { DataSourceOptions } from "typeorm";
 export function typeOrmConfig() 
 {
 return {
-  host: 'mysqldb',
+  host: 'localhost',
   username: process.env.MYSQLDB_USER,
   password: process.env.MYSQLDB_ROOT_PASSWORD,
-  port: Number(process.env.MYSQLDB_LOCAL_PORT),
+  port: Number(process.env.MYSQLDB_DOCKER_PORT),
   database: process.env.MYSQLDB_DATABASE,
   type: 'mysql',
   synchronize: false,
