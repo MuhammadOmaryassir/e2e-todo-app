@@ -1,22 +1,21 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { CreateTodoDto } from './dto/create-todo.dto';
+import { TodosService } from './todos.service';
 
-@Controller('todo')
+@Controller('todos')
 export class TodosController {
+  constructor(private todosService: TodosService) {}
   @Post()
-  createTodo(@Body() body: any) {
-    console.log('Create TODO ', body);
+  createTodo(@Body() body: CreateTodoDto) {
+    return this.todosService.create(body);
   }
   @Get()
   findTodos() {
-    console.log('Get all todos');
+    return this.todosService.find();
   }
   @Get('/:id')
   findTodoById(@Param('id') id: string) {
-    console.log(`Get Todo by Id ${id}`);
-  }
-  @Put('/:id')
-  updateTodoStatus(@Param('id') id: string) {
-    console.log(`Update Todo by Id ${id}`);
+    return this.todosService.findOne(id);
   }
   @Delete('/:id')
   deleteTodo(@Param('id') id: string) {
