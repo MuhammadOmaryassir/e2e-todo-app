@@ -4,7 +4,7 @@ services:
   mysqldb:
     image: mysql:5.7
     restart: unless-stopped
-    env_file: .env
+    env_file: ./todo-apo/.env
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
@@ -12,12 +12,22 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
+  client:
+    build:
+      context: client-side/
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8080:80"
+    restart: unless-stopped
   app:
     depends_on:
       - mysqldb
-    build: .
+    build:
+      context: todo-api/
+      dockerfile: Dockerfile
     restart: unless-stopped
-    env_file: .env
+    env_file: ./todo-apo/.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
