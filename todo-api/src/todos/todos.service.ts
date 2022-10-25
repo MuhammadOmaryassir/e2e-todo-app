@@ -37,7 +37,7 @@ export class TodosService {
     if (!todo) {
       throw new NotFoundException('Todo not found');
     }
-    return this.repo.save({ ...todo, isCompleted: true });
+    return this.repo.save({ ...todo, isCompleted: !todo.isCompleted });
   }
 
   async delete(id: number){
